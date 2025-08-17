@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rolls Royce | Luxury Redefined</title>
+  <a href= "https://www.rolls-roycemotorcars.com/en_GB/home.html">
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #111;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      padding: 15px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.4s ease-in-out;
+      z-index: 1000;
+    }
+
+    nav.scrolled {
+      background: rgba(0, 0, 0, 0.95);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    nav .logo {
+      font-size: 26px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #c0a062;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 16px;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      left: 0;
+      bottom: -5px;
+      background: #c0a062;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #c0a062;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu */
+    .menu-toggle {
+      display: none;
+      font-size: 28px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 65px;
+        right: 0;
+        background: rgba(0,0,0,0.95);
+        width: 200px;
+        text-align: center;
+        padding: 15px 0;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      background: url("https://www.rolls-roycemotorcars.com/content/dam/rrmc/marketUK/rollsroycemotorcars_com/models/phantom/phantom-gallery/phantom-exterior-desktop.jpg") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero h1, .hero p, .hero .btn {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.7);
+      animation: slideDown 1.5s ease-out;
+    }
+
+    .hero p {
+      margin-top: 15px;
+      font-size: 22px;
+      color: #c0a062;
+      animation: slideUp 1.5s ease-out;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #c0a062;
+      color: #000;
+      font-size: 18px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #fff;
+      color: #000;
+      transform: scale(1.05);
+    }
+
+    /* Section */
+    section {
+      padding: 80px 10%;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease-in-out;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    section h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #c0a062;
+    }
+
+    section p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 18px;
+      color: #ddd;
+    }
+
+    section img {
+      margin-top: 30px;
+      border-radius: 12px;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+      transition: transform 0.5s ease, opacity 0.5s;
+    }
+
+    section img:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      max-width: 900px;
+      margin: 50px auto;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      text-align: center;
+      background: #000;
+      padding-bottom: 20px;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-bottom: 2px solid #c0a062;
+    }
+
+    .carousel-item h3 {
+      margin-top: 15px;
+      font-size: 22px;
+      color: #c0a062;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      border: none;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      background: #c0a062;
+      color: #000;
+    }
+
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
+
+    .carousel-dots {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .carousel-dots .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 6px;
+      display: inline-block;
+      border-radius: 50%;
+      background: #555;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .carousel-dots .dot.active {
+      background: #c0a062;
+      transform: scale(1.2);
+    }
+
+    /* Footer */
+    footer {
+      padding: 30px;
+      text-align: center;
+      background: #000;
+      color: #888;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    #luxury img {
+  display: block;
+  margin: 40px auto;              /* centers the image */
+  max-width: 1100px;              /* bigger size on desktop */
+  width: 90%;                     /* responsive – shrinks on smaller screens */
+  height: auto;                   /* keeps proportions */
+  border-radius: 15px;            /* smooth corners for luxury look */
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6); /* premium shadow */
+  transition: transform 0.4s ease;
+}
+
+#luxury img:hover {
+  transform: scale(1.03);         /* subtle zoom effect on hover */
+}
+
+
+    /* Animations */
+    @keyframes slideDown {
+      from {transform: translateY(-50px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+    @keyframes slideUp {
+      from {transform: translateY(50px); opacity: 0;}
+      to {transform: translateY(0); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="logo">Rolls Royce</div>
+    <span class="menu-toggle">&#9776;</span>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#luxury">Luxury</a></li>
+      <li><a href="#models">Models</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero" id="home">
+    <h1>Luxury Redefined</h1>
+    <p>The Spirit of Ecstasy Awaits You</p>
+    <button class="btn" onclick="document.querySelector('#models').scrollIntoView({behavior:'smooth'})">Explore Models</button>
+  </div>
+
+  <!-- Luxury Section -->
+  <section id="luxury">
+    <h2>Unmatched Elegance</h2>
+    <p>Rolls Royce is the pinnacle of automotive luxury, blending timeless design with modern innovation. Every detail is crafted with perfection, redefining what it means to travel in style.</p>
+    <img src="images (14).jpg" alt="Rolls Royce Interior">
+  </section>
+
+  <!-- Models Section -->
+  <section id="models">
+    <h2>Our Models</h2>
+    <p>From the iconic Phantom to the adventurous Cullinan, explore a range of models designed to cater to your every need while offering unparalleled comfort and performance.</p>
+    <div class="carousel">
+      <div class="carousel-track">
+        <div class="carousel-item"><img src="Rolls_Royce_Phantom_Orchid_1643515213551_1643515219074.avif"><h3>Rolls Royce Phantom</h3></div>
+        <div class="carousel-item"><img src="Rolls-Royce-Cullinan-1_1n.jpg"><h3>Rolls Royce Cullinan</h3></div>
+        <div class="carousel-item"><img src="rolls-royce-dawn-overdose-rolls-royce-2017-cars-hd-wallpaper-preview.jpg"><h3>Rolls Royce Ghost</h3></div>
+        <div class="carousel-item"><img src="rolls-royce-ghost-black-badge-rolls-royce-phantom-series-ii-2560x1440-8671.jpg"><h3>Rolls Royce Dawn</h3></div>
+        <div class="carousel-item"><img src="rolls-royce-wraith-uhd-4k-wallpaper.jpg"><h3>Rolls Royce Wraith</h3></div>
+      </div>
+      <button class="carousel-btn prev">&#10094;</button>
+      <button class="carousel-btn next">&#10095;</button>
+      <div class="carousel-dots"></div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" style="border-top:2px solid #c0a062;">
+    <h2>Contact Us</h2>
+    <p>For inquiries, bookings, or more information, connect with us at <b>info@rollsroyce.com</b></p>
+    <img src="8353_l.avif" alt="Rolls Royce Showroom">
+  </section>
+
+  <!-- Footer -->
+  <footer>© 2025 Rolls Royce. All Rights Reserved.</footer>
+
+  <script>
+    // Navbar scroll effect
+    window.addEventListener("scroll", () => {
+      document.getElementById("navbar").classList.toggle("scrolled", window.scrollY > 50);
+    });
+
+    // Section fade-in
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("show"); });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
+
+    // Mobile Menu
+    document.querySelector(".menu-toggle").addEventListener("click", () => {
+      document.querySelector("nav ul").classList.toggle("active");
+    });
+
+    // Carousel
+    const track = document.querySelector(".carousel-track");
+    const items = document.querySelectorAll(".carousel-item");
+    const prevBtn = document.querySelector(".carousel-btn.prev");
+    const nextBtn = document.querySelector(".carousel-btn.next");
+    const dotsContainer = document.querySelector(".carousel-dots");
+
+    let index = 0;
+    items.forEach((_, i) => {
+      const dot = document.createElement("span");
+      dot.classList.add("dot");
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => { index = i; showSlide(); });
+      dotsContainer.appendChild(dot);
+    });
+
+    const dots = document.querySelectorAll(".dot");
+
+    function updateDots() {
+      dots.forEach(dot => dot.classList.remove("active"));
+      dots[index].classList.add("active");
+    }
+
+    function showSlide() {
+      if (index >= items.length) index = 0;
+      if (index < 0) index = items.length - 1;
+      track.style.transform = `translateX(${-index * 100}%)`;
+      updateDots();
+    }
+
+    nextBtn.addEventListener("click", () => { index++; showSlide(); });
+    prevBtn.addEventListener("click", () => { index--; showSlide(); });
+
+    let autoSlide = setInterval(() => { index++; showSlide(); }, 5000);
+
+    // Pause on hover
+    document.querySelector(".carousel").addEventListener("mouseenter", () => clearInterval(autoSlide));
+    document.querySelector(".carousel").addEventListener("mouseleave", () => autoSlide = setInterval(() => { index++; showSlide(); }, 5000));
+  </script>
+</body>
+</html>
